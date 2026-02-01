@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smith  Tech Support Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8a2be2;
+      --secondary: #00c9ff;
+      --accent: #ff416c;
+      --dark: #121212;
+      --darker: #0a0a0a;
+      --light: #f5f5f5;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--darker), var(--dark));
+      color: var(--light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow-x: hidden;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    .bg-circle {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: 10%;
+      left: 10%;
+      animation: float 12s infinite ease-in-out;
+    }
+
+    .circle-2 {
+      width: 250px;
+      height: 250px;
+      background: var(--secondary);
+      bottom: 15%;
+      right: 10%;
+      animation: float 15s infinite ease-in-out reverse;
+    }
+
+    .circle-3 {
+      width: 180px;
+      height: 180px;
+      background: var(--accent);
+      top: 50%;
+      left: 80%;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-img-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 25px;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+      border-color: rgba(138, 43, 226, 0.5);
+    }
+
+    .profile-img-container::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+      z-index: -1;
+      animation: rotate 6s linear infinite;
+    }
+
+    .typing-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin: 15px 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 300% 300%;
+      animation: gradient-shift 8s ease infinite;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .typing-text::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      margin: 10px 0 25px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin: 30px 0;
+    }
+
+    .project-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-btn i {
+      font-size: 1.3rem;
+    }
+
+    .project-btn:hover {
+      background: rgba(138, 43, 226, 0.25);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      transition: var(--transition);
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Volume Control Section */
+    .volume-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      padding: 25px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      margin: 20px 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .volume-title {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .volume-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .volume-slider {
+      flex: 1;
+      height: 12px;
+      -webkit-appearance: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+      transition: var(--transition);
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      background: var(--primary);
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+      transition: var(--transition);
+    }
+
+    .volume-slider::-moz-range-thumb:hover {
+      transform: scale(1.1);
+      background: var(--primary);
+    }
+
+    .volume-value {
+      min-width: 50px;
+      text-align: center;
+      font-weight: 600;
+      background: rgba(138, 43, 226, 0.2);
+      padding: 5px 10px;
+      border-radius: 8px;
+      color: var(--primary);
+    }
+
+    .control-btn {
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: var(--transition);
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .control-btn:hover {
+      background: rgba(0, 201, 255, 0.25);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    /* Animations */
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -15px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(15px, 5px); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .card {
+        padding: 30px 20px;
+      }
+      
+      .typing-text {
+        font-size: 2.4rem;
+      }
+      
+      .subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .projects {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+      }
+      
+      .project-btn {
+        padding: 14px 10px;
+        font-size: 1rem;
+      }
+      
+      .volume-controls {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .typing-text {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .projects {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-img-container {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background elements -->
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+  <div class="bg-circle circle-3"></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="profile-header">
+        <div class="profile-img-container">
+          <img src="https://files.catbox.moe/p47oyu.jpg" alt="Smith 's Profile" class="profile-img" onclick="speak('Smith \'s profile image')">
+        </div>
+        
+        <h1 class="typing-text">Smith  Tech Support</h1>
+        <p class="subtitle">Smith _quotes Tech Portfolio — Edited and credited to Smith </p>
+      </div>
+
+      <div class="projects">
+        <button class="project-btn" onclick="window.open('https://Smith -quotes-trend.github.io/Motivation-quotes-/Smith .html', '_blank'); speak('Intelligent Assistant')">
+          <i class="fas fa-robot"></i> Smith  AI
+        </button>
+        
+        <button class="project-btn" onclick="window.open('https://Smith -quotes-trend.github.io/Motivation-quotes-/', '_blank'); speak('About page')">
+          <i class="fas fa-user"></i> About Page
+        </button>
+        
+        <button class="project-btn" onclick="window.open('https://www.tiktok.com/@Smith _quotes_trend', '_blank'); speak('TikTok account')">
+          <i class="fab fa-tiktok"></i> TikTok
+        </button>
+        
+        <button class="project-btn" onclick="window.open('', '_blank'); speak('Instagram')">
+          <i class="fab fa-instagram"></i> Instagram
+        </button>
+        
+        <button class="project-btn" onclick="window.open('https://api.whatsapp.com/send?phone=256779008997&text=Found%20on%20Your%20portfolio%20friend', '_blank'); speak('WhatsApp contact')">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </button>
+        
+        <button class="project-btn" onclick="window.open('', '_blank'); speak('Website')">
+          <i class="fas fa-globe"></i> Website
+        </button>
+      </div>
+
+      <button class="whatsapp-btn" onclick="window.open('https://whatsapp.com/channel/0029Vb2hvMCLo4hneOm0Tq0P', '_blank'); speak('Join WhatsApp Channel')">
+        <i class="fab fa-whatsapp"></i> Join WhatsApp Channel
+      </button>
+    </div>
+
+    <!-- Enhanced Volume Controls -->
+    <div class="volume-controls">
+      <h2 class="volume-title"><i class="fas fa-volume-up"></i> Music Volume Control</h2>
+      
+      <div class="volume-container">
+        <i class="fas fa-volume-down" style="color: rgba(255,255,255,0.7);"></i>
+        <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider" id="volumeSlider" oninput="setVolume(this.value)">
+        <i class="fas fa-volume-up" style="color: rgba(255,255,255,0.7);"></i>
+        <span class="volume-value" id="volumeValue">100%</span>
+      </div>
+      
+      <button class="control-btn" onclick="togglePlay()">
+        <i class="fas fa-pause" id="playIcon"></i> <span id="playText">Pause Music</span>
+      </button>
+    </div>
+  </div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="https://files.catbox.moe/l72n98.m4a" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <footer>
+    © 2025 Portfolio with Smith _official — Thank you for visiting!
+  </footer>
+
+  <script>
+    // Enhanced typing effect
+    const typingElement = document.querySelector(".typing-text");
+    const text = "Smith  Tech Support";
+    typingElement.textContent = ""; // Clear any initial content
+    
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeEffect() {
+      const currentText = typingElement.textContent;
+      
+      if (!isDeleting && charIndex < text.length) {
+        typingElement.textContent = text.substring(0, charIndex + 1);
+        charIndex++;
+        setTimeout(typeEffect, 150);
+      } else if (isDeleting && charIndex > 0) {
+        typingElement.textContent = text.substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(typeEffect, 100);
+      } else {
+        isDeleting = !isDeleting;
+        setTimeout(typeEffect, isDeleting ? 1000 : 200);
+      }
+    }
+    
+    // Start the typing effect after a short delay
+    setTimeout(typeEffect, 500);
+
+    // Audio controls
+    const music = document.getElementById("bg-music");
+    const playIcon = document.getElementById("playIcon");
+    const playText = document.getElementById("playText");
+    const volumeValue = document.getElementById("volumeValue");
+
+    function togglePlay() {
+      if (music.paused) {
+        music.play();
+        playIcon.className = "fas fa-pause";
+        playText.textContent = "Pause Music";
+        speak("Music resumed");
+      } else {
+        music.pause();
+        playIcon.className = "fas fa-play";
+        playText.textContent = "Resume Music";
+        speak("Music paused");
+      }
+    }
+
+    function setVolume(value) {
+      const volume = parseFloat(value);
+      music.volume = volume;
+      const percent = Math.round(volume * 100);
+      volumeValue.textContent = `${percent}%`;
+      
+      // Visual feedback when adjusting volume
+      volumeValue.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        volumeValue.style.transform = "scale(1)";
+      }, 200);
+    }
+
+    function speak(text) {
+      if (window.speechSynthesis && window.speechSynthesis.speak) {
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'en-US';
+        msg.volume = music.volume; // Match volume with music
+        window.speechSynthesis.speak(msg);
+      }
+    }
+
+    // Initialize volume display
+    volumeValue.textContent = "100%";
+    
+    // Set initial volume
+    music.volume = 1;
+  </script>
+</body>
+</html>
